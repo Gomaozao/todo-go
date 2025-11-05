@@ -1,8 +1,8 @@
 inside () are how the commands should be typed. NOTE: can be changed later.
 TODO list Requirements
-- List all TODO's ($ todo-go todo) Outputs all todo's created.
-- List/ADD a TODO ($ todo-go todo-name) Outputs "todo-name created." if todo doesn't exist, create it. If it already exists, Output it.
-- ADD task to TODO ($ todo-go todo-name -a task-name -p) Outputs todo with the new task.
+- List all TODO's ($ todo-go) Outputs all todo's created.
+- List/ADD a TODO list ($ todo-go todo-name) Outputs "todo-name created." if todo doesn't exist, create it. If it already exists, Output it.
+- ADD task to TODO ($ todo-go todo-name task-name ) Outputs todo with the new task.
  -a is for adding a task, -p is for specifying priority.
  NOTE: Todo list is by default is sorted by priority. (low to high, 1 to 4) (low, medium, high, very high)
 - REMOVE TODO ($ todo-go todo-name -r) Outputs "todo-name removed." if no argument for -r is passed, entire todo is removed.
