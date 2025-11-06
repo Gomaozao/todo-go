@@ -1,26 +1,45 @@
 package main
 
-import "flag"
+import (
+	"errors"
+	"fmt"
+	"time"
+)
 
-// task is just a struct
-// todo is also a struct
+type Todo struct {
+	todoName    string
+	isCompleted bool
+	createdAt   time.Time
+	completedAt *time.Time
+}
+type todos []Todo
 
-var hFlag = flag.Uint("h", 1, "") // THIRD argument should be all of the other flags explanation
-
-func (t todo) createTodoList(listName string) {
-	if listName == t.TodoName {
-		//Output to the console the TodoList and it's  tasks
+func (todos *todos) add(title string) {
+	todo := Todo{
+		todoName:    title,
+		isCompleted: false,
+		completedAt: nil,
+		createdAt:   time.Now(),
 	}
-	t.TodoName = listName
+
+	*todos = append(*todos, todo)
 }
 
-type todo struct {
-	task
-	tasks    []string // slice should be of type string or type task?
-	TodoName string
+func (todos *todos) validadeIndex(index int) error {
+	if index < 0 || index >= len(*todos) {
+		err := errors.New("Invalid Index")
+		fmt.Println(err)
+		return err
+	}
+	return nil
 }
 
-type task struct {
-	TaskName    string
-	IsCompleted bool
+func (todos *todos) deleteTodo(index int) error {
+	t := *todos
+
+	if err := t.validadeIndex(index); err != nil {
+		return err
+	}
+	*todos = append(t[:index], t[index+1:]...)
+	return nil
 }
