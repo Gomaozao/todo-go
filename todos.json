@@ -1,0 +1,14 @@
+[
+    {
+        "TodoName": "Neetcode video",
+        "IsCompleted": true,
+        "CreatedAt": "2025-11-08T18:31:09.573031589-03:00",
+        "CompletedAt": "2025-11-08T18:31:09.57303207-03:00"
+    },
+    {
+        "TodoName": "Leetcode",
+        "IsCompleted": false,
+        "CreatedAt": "2025-11-08T18:31:09.573031819-03:00",
+        "CompletedAt": null
+    }
+]

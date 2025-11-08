@@ -11,25 +11,25 @@ import (
 )
 
 type Todo struct {
-	todoName    string
-	isCompleted bool
-	createdAt   time.Time
-	completedAt *time.Time
+	TodoName    string
+	IsCompleted bool
+	CreatedAt   time.Time
+	CompletedAt *time.Time
 }
-type todos []Todo
+type Todos []Todo
 
-func (todos *todos) add(title string) {
+func (todos *Todos) add(title string) {
 	todo := Todo{
-		todoName:    title,
-		isCompleted: false,
-		completedAt: nil,
-		createdAt:   time.Now(),
+		TodoName:    title,
+		IsCompleted: false,
+		CompletedAt: nil,
+		CreatedAt:   time.Now(),
 	}
 
 	*todos = append(*todos, todo)
 }
 
-func (todos *todos) validadeIndex(index int) error {
+func (todos *Todos) validadeIndex(index int) error {
 	if index < 0 || index >= len(*todos) {
 		err := errors.New("Invalid Index")
 		fmt.Println(err)
@@ -38,7 +38,7 @@ func (todos *todos) validadeIndex(index int) error {
 	return nil
 }
 
-func (todos *todos) deleteTodo(index int) error {
+func (todos *Todos) deleteTodo(index int) error {
 	t := *todos
 
 	if err := t.validadeIndex(index); err != nil {
@@ -48,32 +48,30 @@ func (todos *todos) deleteTodo(index int) error {
 	return nil
 }
 
-// method that takes an index as input and turns whatever
-func (todos *todos) toggle(index int) error {
+func (todos *Todos) toggle(index int) error {
 	t := *todos
 	if err := t.validadeIndex(index); err != nil {
 		return err
 	}
-	completed := t[index].isCompleted
+	completed := t[index].IsCompleted
 	if !completed {
 		completionTime := time.Now()
-		t[index].completedAt = &completionTime
+		t[index].CompletedAt = &completionTime
 	}
-	t[index].isCompleted = !completed
+	t[index].IsCompleted = !completed
 	return nil
 }
 
-func (todos *todos) edit(index int, title string) error {
+func (todos *Todos) edit(index int, title string) error {
 	t := *todos
 	if err := t.validadeIndex(index); err != nil {
 		return err
 	}
-	t[index].todoName = title
-
+	t[index].TodoName = title
 	return nil
 }
 
-func (todos *todos) print() {
+func (todos *Todos) print() {
 	table := table.New(os.Stdout)
 	table.SetRowLines(false)
 	table.SetHeaders("#", "TodoName", "isCompleted", "CreatedAt", "CompletedAt")
@@ -81,13 +79,13 @@ func (todos *todos) print() {
 		completed := "❌"
 		completedAt := ""
 
-		if t.isCompleted {
+		if t.IsCompleted {
 			completed = "✅"
-			if t.completedAt != nil {
-				completedAt = t.completedAt.Format(time.RFC1123)
+			if t.CompletedAt != nil {
+				completedAt = t.CompletedAt.Format(time.RFC1123)
 			}
 		}
-		table.AddRow(strconv.Itoa(index), t.todoName, completed, t.createdAt.Format(time.RFC1123), completedAt)
+		table.AddRow(strconv.Itoa(index), t.TodoName, completed, t.CreatedAt.Format(time.RFC1123), completedAt)
 	}
 	table.Render()
 }
